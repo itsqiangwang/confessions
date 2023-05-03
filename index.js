@@ -32,7 +32,7 @@ var wallWritingArr = [
   "i brought a bottle of 100% pure maple syrup into the dining hall, because the fake syrup sucks and now i have spilled 100% pure maple syrup all over the inside of my bag.",
   "people say nothing is impossible, but i do nothing everyday",
   "pain is temporary",
-  "the other day i went back to my mother and i said, \"i'm crazy, mom. help me\". And she said, \"i know how you feel, son. cause it runs in the family.\"",
+  'the other day i went back to my mother and i said, "i\'m crazy, mom. help me". And she said, "i know how you feel, son. cause it runs in the family."',
   "we too shall pass",
   "remember what happened in shanghai, china",
 
@@ -139,23 +139,30 @@ var wallWritingArr = [
   "why are the people here so bitchy?",
   "i believe in the myth of femininity.",
   "i believe in the myth of unintentional celibacy.",
-  "yeah, i like life, too."
-]
+  "yeah, i like life, too.",
+];
 
-function voicesOnTheWall(){
-    var totalWritingNum = 125;
-    var randomIndex = Math.floor(Math.random() * ((totalWritingNum+1) - 1) + 1);
-    audio.src = "audio/writings-on-the-wall-whispers-" + randomIndex + ".mp3";
-    audio.autoplay = true;
-    image.src = "images/yale-student-linkedin-photo-" + randomIndex + ".jpg";
-    writingOnTheWall.innerText = wallWritingArr[randomIndex-1];
-    console.log(randomIndex);
+function voicesOnTheWall() {
+  var totalWritingNum = 125;
+  var randomIndex = Math.floor(Math.random() * (totalWritingNum + 1 - 1) + 1);
+  audio.src = "audio/writings-on-the-wall-whispers-" + randomIndex + ".mp3";
+  // audio.autoplay = true;
+  image.src = "images/yale-student-linkedin-photo-" + randomIndex + ".jpg";
+  writingOnTheWall.innerText = wallWritingArr[randomIndex - 1];
+  console.log(randomIndex);
 
-    // audio on mobile 
-    body.addEventListener('click', function(e){
+  var playState = "paused";
+  // audio on mobile
+  body.addEventListener("click", function (e) {
+    if (playState == "paused") {
       audio.play();
       audio.autoplay = true;
-    })
+      playState = "playing";
+    } else if (playState == "playing") {
+      audio.pause();
+      playState = "paused";
+    }
+  });
 }
 
 voicesOnTheWall();
